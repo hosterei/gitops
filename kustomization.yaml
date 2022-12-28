@@ -3,10 +3,12 @@ kind: Kustomization
 
 namespace: argocd
 
-resources:
-# argocd crds
-- https://github.com/argoproj/argo-cd/blob/master/manifests/crds/kustomization.yaml
+crds:
+  # argocd crds
+  - https://github.com/argoproj/argo-cd/blob/master/manifests/crds/kustomization.yaml
 
+
+resources:
 # argocd with argocd-lovelvy und vault plugin
 - https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
 
