@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argocd-vault-replacer
+  name: argocd-repo-server
 spec:
   template:
     spec:
