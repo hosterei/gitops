@@ -1,0 +1,64 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cd.mgmt.hosterei.ch
+spec:
+  secretName: cd.mgmt.hosterei.ch-tls
+  commonName: cd.mgmt.hosterei.ch
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+    group: cert-manager.io
+  dnsNames:
+  - cd.mgmt.hosterei.ch
+  secretTemplate:
+    annotations:
+      reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "istio-ingress"  
+      reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "istio-ingress"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: argocd-gateway
+spec:
+  selector:
+    istio: gateway
+  servers:
+    - hosts:
+        - cd.mgmt.hosterei.ch
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: cd.mgmt.hosterei.ch-tls
+    - hosts:
+        - cd.mgmt.hosterei.ch
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: argocd-virtual-service
+  namespace: argocd
+spec:
+  hosts:
+  - cd.mgmt.hosterei.ch
+  gateways:
+  - argocd-gateway
+  http:
+  - route:
+    - destination:
+        host: argocd-server.argocd.svc.cluster.local
+        port:
+          number: 80

@@ -1,15 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: hosterei-base
+  name: hosterei-mgmt
   namespace: argocd
 spec:
   generators:
-  - git:
-      repoURL: https://github.com/hosterei/tools.git
-      revision: main
-      directories:
-      - path: base/*
+  - merge:
+      mergeKeys:
+        - path.basename
+      generators:
+      - git: # base repo
+          repoURL: https://github.com/hosterei/tools.git
+          revision: main
+          directories:
+          - path: base/*
+      - git: # mgmt overlay repo
+          repoURL: https://github.com/hosterei/tools.git
+          revision: main
+          directories:
+          - path: overlays/mgmt/*
+      
   template:
     metadata:
       name: '{{path.basename}}'

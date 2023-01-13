@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - namespace.yaml
+- ingress.yaml
 
 - ./projects
 - ./applicationssets/base-local-apps.yaml

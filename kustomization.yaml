@@ -3,14 +3,9 @@ kind: Kustomization
 
 namespace: argocd
 
-crds:
-  # argocd crds
-  - https://github.com/argoproj/argo-cd/blob/master/manifests/crds/kustomization.yaml
-
-
 resources:
 # argocd with argocd-lovelvy und vault plugin
-- https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.5.5/manifests/ha/install.yaml
 
 # argocd projects & applicationssets
 - ./manifests/
@@ -19,6 +14,8 @@ patches:
   - path: patches/argo-cm.yaml
   - path: patches/argocd-lovely-plugin.yaml
   - path: patches/argocd-vault-replacer.yaml
+
+  - path: patches/disable-tls.yaml
 
   - path: patches/add-tolerations.yaml
     target:
