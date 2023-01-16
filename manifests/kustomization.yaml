@@ -6,5 +6,5 @@ resources:
 - ingress.yaml
 
 - ./projects
-- ./applicationssets/base-local-apps.yaml
+- ./applicationssets/mgmt-local-apps.yaml
 
