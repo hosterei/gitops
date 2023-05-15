@@ -11,8 +11,8 @@ resources:
   - ./manifests/
 
 patches:
-  # install argocd-vault-replacer
-  - path: patches/argocd-vault-replacer.yaml
+  # install argocd-lovely-plugin
+  - path: patches/argocd-lovely-plugin.yaml
     target:
       kind: Deployment
       name: argocd-repo-server
