@@ -17,8 +17,20 @@ patches:
       kind: Deployment
       name: argocd-repo-server
 
-  - path: patches/disable-tls.yaml
+  # Add tolerations to Deployment resources
   - path: patches/add-tolerations.yaml
     target:
-     name: .*
-     kind: (Deployment|DaemonSets|StatefulSets)
+      name: .*
+      kind: Deployment
+
+  # Add tolerations to DaemonSet resources
+  - path: patches/add-tolerations.yaml
+    target:
+      name: .*
+      kind: DaemonSet
+
+  # Add tolerations to StatefulSet resources
+  - path: patches/add-tolerations.yaml
+    target:
+      name: .*
+      kind: StatefulSet
