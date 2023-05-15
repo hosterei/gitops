@@ -4,19 +4,20 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-# argocd with argocd-lovelvy und vault plugin
-- https://raw.githubusercontent.com/argoproj/argo-cd/v2.5.5/manifests/ha/install.yaml
+  # argocd with argocd-lovelvy und vault plugin
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.7.1
 
-# argocd projects & applicationssets
-- ./manifests/
+  # argocd projects & applicationssets
+  - ./manifests/
 
 patches:
-  - path: patches/argo-cm.yaml
-  - path: patches/argocd-lovely-plugin.yaml
+  # install argocd-vault-replacer
   - path: patches/argocd-vault-replacer.yaml
+    target:
+      kind: Deployment
+      name: argocd-repo-server
 
   - path: patches/disable-tls.yaml
-
   - path: patches/add-tolerations.yaml
     target:
      name: .*
