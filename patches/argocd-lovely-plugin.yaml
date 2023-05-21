@@ -11,11 +11,14 @@ spec:
           # This command is actually already set in the image.
           command: [/var/run/argocd/argocd-cmp-server] # Entrypoint should be Argo CD lightweight CMP server i.e. argocd-cmp-server
           # Choose your image here - this one has vault replacer in it
-          image: ghcr.io/oujonny/argocd-lovely-plugin:v3
+          image: ghcr.io/oujonny/argocd-lovely-plugin:v4.2
           # Here we are configuring default evironment for every app - in this case vault
           envFrom:
             - secretRef:
                 name: vault-env
+          env:
+            - name: LOVELY_PLUGINS
+              value: argocd-vault-plugin
           securityContext:
             runAsNonRoot: true
             runAsUser: 999
