@@ -18,7 +18,7 @@ spec:
                 name: vault-env
           env:
             - name: LOVELY_PLUGINS
-              value: argocd-vault-plugin
+              value: argocd-vault-plugin generate -
           securityContext:
             runAsNonRoot: true
             runAsUser: 999
