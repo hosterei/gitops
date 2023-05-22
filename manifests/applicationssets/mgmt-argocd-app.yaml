@@ -9,6 +9,7 @@ spec:
   project: "default"
   source:
     repoURL: https://github.com/hosterei/gitops.git
+    path: ./
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
