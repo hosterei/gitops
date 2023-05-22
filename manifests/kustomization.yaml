@@ -8,4 +8,5 @@ resources:
 
 - ./projects
 - ./applicationssets/mgmt-local-apps.yaml
+- ./applicationssets/mgmt-argocd-app.yaml
 

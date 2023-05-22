@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hosterei-mgmt-argocd
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+spec:
+  project: "default"
+  source:
+    repoURL: https://github.com/hosterei/gitops.git
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: "argocd"
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+        
