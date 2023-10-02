@@ -11,6 +11,12 @@ resources:
   - ./manifests/
 
 patches:
+  # add argocd-insecure server to run only http
+  - path: patches/server-insecure.yaml
+    target:
+      kind: Deployment
+      name: argocd-server
+
   # install argocd-lovely-plugin
   - path: patches/argocd-lovely-plugin.yaml
     target:
