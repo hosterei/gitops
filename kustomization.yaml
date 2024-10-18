@@ -5,7 +5,7 @@ namespace: argocd
 
 resources:
   # argocd with argocd-lovelvy und vault plugin
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.15.5
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install #?ref=v2.15.5
 
   # argocd projects & applicationssets
   - ./manifests/
@@ -14,8 +14,8 @@ patches:
   # add argocd-insecure server to run only http
   - path: patches/server-insecure.yaml
     target:
-      kind: Deployment
-      name: argocd-server
+      kind: ConfigMap
+      name: argocd-cmd-params-cm
 
   # install argocd-lovely-plugin
   - path: patches/argocd-lovely-plugin.yaml

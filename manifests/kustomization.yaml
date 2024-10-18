@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - ingress.yaml
-- vault-env.yaml
 
 - ./projects
 - ./applicationssets/mgmt-local-apps.yaml

@@ -1,4 +1,3 @@
-# Downloads the plugin and moves it to /custom-tools, which is then mounted on the argocd-repo-server
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,7 +22,7 @@ spec:
             runAsNonRoot: true
             runAsUser: 999
           volumeMounts:
-            # Import the repo-server's pliugin binary
+            # Import the repo-server's plugin binary
             - mountPath: /var/run/argocd
               name: var-files
             - mountPath: /home/argocd/cmp-server/plugins
