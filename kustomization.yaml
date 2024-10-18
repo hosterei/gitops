@@ -5,7 +5,7 @@ namespace: argocd
 
 resources:
   # argocd with argocd-lovelvy und vault plugin
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.7.1
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.15.5
 
   # argocd projects & applicationssets
   - ./manifests/
