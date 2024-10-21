@@ -5,7 +5,7 @@ namespace: argocd
 
 resources:
   # argocd with argocd-lovelvy und vault plugin
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install #?ref=v2.15.5
+  - github.com/argoproj/argo-cd/manifests/cluster-install #?ref=v2.15.5
 
   # argocd projects & applicationssets
   - ./manifests/
@@ -19,6 +19,12 @@ patches:
 
   # install argocd-lovely-plugin
   - path: patches/argocd-lovely-plugin.yaml
+    target:
+      kind: Deployment
+      name: argocd-repo-server
+
+  # add affinity to argocd-repo-server because of vault plugin only suppot x86
+  - path: patches/add-x86-affinity.yaml
     target:
       kind: Deployment
       name: argocd-repo-server

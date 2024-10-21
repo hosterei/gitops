@@ -4,4 +4,4 @@
   - key: "server-usage"
     operator: "Equal"
     value: "mgmt"
-    effect: "PreferNoSchedule" 
+    effect: "PreferNoSchedule"
